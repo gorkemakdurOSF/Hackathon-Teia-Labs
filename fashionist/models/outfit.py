@@ -1,5 +1,6 @@
 from typing import List, Optional
 
+from bson.objectid import ObjectId
 from pydantic import BaseModel, Field
 
 from . import PyObjectId
@@ -10,7 +11,7 @@ from .clothes import Clothes
 class Outfit(BaseModel, Base):
     __collection__ = "outfit"
 
-    id: PyObjectId = Field()
+    id: PyObjectId = Field(default_factory=ObjectId, alias='_id')
     clothes: List[Clothes] = Field()
     tags: List[str] = Field()
 

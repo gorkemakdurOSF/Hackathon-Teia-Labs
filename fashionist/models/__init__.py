@@ -1,4 +1,3 @@
-import asyncio
 from typing import Optional
 
 from bson import ObjectId
@@ -46,11 +45,12 @@ def init_database(
 ) -> Database:
     schema = uri.split("/")[-1]
     schema = schema.split("?")[0]
+
     if username is None and password is None:
         database.client = AsyncIOMotorClient(uri)
     else:
         database.client = AsyncIOMotorClient(uri, username=username, password=password)
+
     database.database = database.client[schema]
-    asyncio.ensure_future(database.database["file"].create_index("path_hash", unique=True))
 
     return database
