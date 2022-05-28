@@ -1,0 +1,14 @@
+name: fashionista
+channels:
+    - conda-forge
+    - defaults
+    - nvidia
+    - pytorch
+dependencies:
+    - python=3.9
+    - conda-forge::pip
+    - conda-forge::matplotlib
+    - conda-forge::numpy
+    - nvidia::cudatoolkit=11.3
+    - pytorch::pytorch=1.11.0
+    - pytorch::torchvision
