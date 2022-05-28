@@ -11,6 +11,10 @@ class Settings(BaseSettings):
     API_VERSION: str
     REDIRECT_URI: str
     SCOPES: List[str]
+    HOST: str
+    PORT: int
+    RELOAD: bool
+    DB_CONNECTION_URI: str
 
     class Config:
         env_file = ".env"

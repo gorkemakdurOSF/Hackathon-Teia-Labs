@@ -9,7 +9,6 @@ from pydantic import BaseModel
 from . import PyObjectId
 from . import database
 
-
 T = TypeVar("T", bound=BaseModel)
 
 
@@ -46,17 +45,17 @@ class Base:
             order: Tuple[str, bool] = Ellipsis,
             offset: int = 0,
             limit: int = 100,
-            **kwargs
+            kwargs: dict = None
     ) -> List[T]:
         cursor = database.database[cls.__collection__].find(kwargs)
         if order != Ellipsis:
             cursor = cursor.sort(order[0], 1 if order[1] else -1)
 
-        return await cursor.skip(offset).to_list(limit + offset)
+        return await cursor.skip(offset).to_list(limit)
 
     @classmethod
-    async def read_extra(cls, query, extra) -> List[T]:
-        return await database.database[cls.__collection__].find(query, extra).to_list()
+    async def read_extra(cls, query, extra, offset: int = 0, limit: int = 10) -> List[T]:
+        return await database.database[cls.__collection__].find(query, extra).skip(offset).to_list(limit)
 
     @classmethod
     async def upsert(cls, data: T) -> int:

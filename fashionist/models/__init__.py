@@ -1,6 +1,3 @@
-import asyncio
-from typing import Optional
-
 from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorClient
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -39,18 +36,8 @@ class Database(metaclass=Singleton):
 database = Database()
 
 
-def init_database(
-        uri: Optional[str],
-        username: Optional[str] = None,
-        password: Optional[str] = None
-) -> Database:
-    schema = uri.split("/")[-1]
-    schema = schema.split("?")[0]
-    if username is None and password is None:
-        database.client = AsyncIOMotorClient(uri)
-    else:
-        database.client = AsyncIOMotorClient(uri, username=username, password=password)
-    database.database = database.client[schema]
-    asyncio.ensure_future(database.database["file"].create_index("path_hash", unique=True))
+def init_database(uri: str) -> Database:
+    database.client = AsyncIOMotorClient(uri)
+    database.database = database.client['teia']
 
     return database
