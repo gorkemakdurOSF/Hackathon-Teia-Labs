@@ -16,7 +16,7 @@ class Wardrobe(BaseModel, Base):
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {PyObjectId: str}
+        json_encoders = {ObjectId: str}
 
 
 class UpdateWardrobe(BaseModel):
@@ -25,4 +25,4 @@ class UpdateWardrobe(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {PyObjectId: str}
+        json_encoders = {ObjectId: str}

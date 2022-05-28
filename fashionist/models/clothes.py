@@ -16,7 +16,7 @@ class Clothes(BaseModel, Base):
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {PyObjectId: str}
+        json_encoders = {ObjectId: str}
 
 
 class UpdateClothes(BaseModel):

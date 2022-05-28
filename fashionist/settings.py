@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     HOST: str
     PORT: int
     RELOAD: bool
+    DB_CONNECTION_URI: str
 
     class Config:
         env_file = ".env"
