@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Response
 from ..models.wardrobe import Wardrobe, UpdateWardrobe
 
-router = APIRouter(prefix='/wardrobe/{_id}')
+router = APIRouter(prefix='/wardrobe')
 
 
-@router.get('/', status_code=200, response_model=Wardrobe)
+@router.get('/{_id}', status_code=200, response_model=Wardrobe)
 async def get_wardrobe(
         _id: str,
         outfits_offset: int = 0,
