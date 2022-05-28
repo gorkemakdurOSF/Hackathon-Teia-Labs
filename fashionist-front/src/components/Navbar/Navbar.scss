@@ -1,0 +1,26 @@
+.nav-brand {
+    a {
+        all: unset;
+        cursor: pointer;
+    }
+}
+
+.nav-link {
+    width: 100%;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, .05);
+    }
+
+    a {
+        all: unset;
+        cursor: pointer;
+    }
+
+    .link-icon {
+        margin-left: 0.5rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+}

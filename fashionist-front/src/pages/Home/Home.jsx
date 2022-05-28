@@ -1,10 +1,11 @@
-import "./Home.css";
+import "./Home.scss";
 import React from "react";
+import Navbar from "../../components/Navbar";
 
 function template() {
   return (
     <div className="home">
-      <h1>Home</h1>
+      <Navbar />
     </div>
   );
 };
