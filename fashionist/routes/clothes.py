@@ -1,6 +1,7 @@
-from typing import List, Optional
+from typing import Any, List, Optional, Dict
 
 from fastapi import APIRouter, Response, HTTPException
+from fastapi import UploadFile, Body
 
 from ..models import PyObjectId
 from ..models.clothes import Clothes, UpdateClothes
@@ -52,8 +53,14 @@ async def get_clothes(_id: str, wardrobe_id: Optional[str] = None):
 
 
 @router.post('/', status_code=201, response_model=Clothes)
-async def create_clothes(clothes: Clothes):
-    await Clothes.create(clothes)
+async def create_clothes(value: UploadFile, tags: List[str]=Body()):
+    clothes_id = await Clothes.create(Clothes(
+        value=value.file.read(), 
+        tags=tags, url=f'http://192.168.1.121:8080/{value.filename}'
+        ))
+
+    clothes = (await Clothes.read(kwargs=dict(_id=clothes_id)))[0]
+    
     return clothes
 
 

@@ -14,13 +14,26 @@ class Clothes(BaseModel, Base):
 
     id: PyObjectId = Field(default_factory=ObjectId, alias='_id')
     url: str = Field()
+    value: bytes = Field()
     isLiked: bool = Field(default_factory=lambda: random.randint(0, 10) > 3)
     tags: List[str] = Field()
 
     class Config:
         arbitrary_types_allowed = True
-        json_encoders = {ObjectId: str}
+        json_encoders = {ObjectId: str, bytes: str}
 
 
 class UpdateClothes(BaseModel):
     tags: List[str]
+
+
+class CLothesOut(BaseModel):
+    id: PyObjectId
+    url: str 
+    value: str
+    isLiked: bool
+    tags: List[str]
+
+    class Config:
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
