@@ -4,6 +4,8 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Wardrobe from './pages/Wardrobe';
+import InsertProduct from './pages/InsertProduct';
+import CreateOutfit from './pages/CreateOutfit';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="home" element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="wardrobe" element={<Wardrobe />} />
+        <Route path="insert" element={<InsertProduct />} />
+        <Route path="create/outfit" element={<CreateOutfit />} />
       </Routes>
     </div>
   );
