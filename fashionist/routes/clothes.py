@@ -10,6 +10,7 @@ from ..models.wardrobe import Wardrobe
 router = APIRouter(prefix='/clothes')
 
 
+
 @router.get('/', status_code=200, response_model=List[Clothes])
 async def get_all_clothes(
         tags: Optional[List[str]] = None,
@@ -54,12 +55,22 @@ async def get_clothes(_id: str, wardrobe_id: Optional[str] = None):
 
 @router.post('/', status_code=201, response_model=Clothes)
 async def create_clothes(value: UploadFile, tags: List[str]=Body()):
+    data = value.file.read()
     clothes_id = await Clothes.create(Clothes(
-        value=value.file.read(), 
+        value=data, 
         tags=tags, url=f'http://192.168.1.121:8080/{value.filename}'
         ))
 
     clothes = (await Clothes.read(kwargs=dict(_id=clothes_id)))[0]
+    clothes['url'] = "/".join([clothes["url"].split("/")[0], str(clothes_id)])
+    await Clothes.update(clothes_id, clothes)
+
+    with open(f'/opt/ssd/osf-hackat/images/{clothes_id}', 'wb') as f:
+        f.write(data)
+
+    out = export_outfits('/opt/ssd/osf-hackat/images/', './res/metadata', 10)
+    for image_id in out:
+        print(out[image_id]) 
     
     return clothes
 
