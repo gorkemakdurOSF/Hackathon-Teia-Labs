@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar";
 import Product from "../../components/Product";
 import clothesService from "../../services/Clothes";
 import outfitService from "../../services/Outfit";
-
+import image from '../../assets/mocks/product.jpg'
 
 import { Button, Container, Grid, Group } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 function CreateOutfit() {
 
   const [clothes, setClothes] = useState([]);
+  const [suggested, setSuggested] = useState([]);
 
   const [outfit, setOutfit] = useState([]);
   const navigate = useNavigate();
@@ -40,9 +41,9 @@ function CreateOutfit() {
 
   const save = () => {
     if (outfit.length > 0) {
-      outfitService.createOutfit(outfit, [])
-        .then(() => {
-          navigate('/home');
+      outfitService.suggestOutfit('', [])
+        .then((response) => {
+          setSuggested(response);
         });
     }
   };
@@ -68,6 +69,31 @@ function CreateOutfit() {
                         isSelectable
                         add={add}
                         remove={remove}
+                      />
+                    </Grid.Col>
+                  )
+                })
+              }
+            </Grid>
+          </Group>
+
+          <Group>
+            <h1>Suggested Outfit</h1>
+            <Grid>
+              {
+                suggested.map((clothing) => {
+                  const c = clothing.split('/');
+                  const folder = c[c.length - 2];
+                  const f = c[c.length - 1];
+
+                  if (f === 'bag.png') return;
+
+                  return (
+                    <Grid.Col span={3}>
+                      <Product
+                        key={f}
+                        id={f}
+                        url={`http://192.168.1.121:8080/${folder}/${f}`}
                       />
                     </Grid.Col>
                   )

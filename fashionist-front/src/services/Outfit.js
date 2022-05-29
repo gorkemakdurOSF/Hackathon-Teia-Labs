@@ -1,7 +1,7 @@
 import client from './Base';
 import urlParamCheck from './Utils';
 
-const endpoint = '/outfits';
+const endpoint = '/clothes';
 
 
 export async function getAllOutfits(tags, wardrobeId, offset, limit) {
@@ -39,6 +39,20 @@ export async function getAllOutfits(tags, wardrobeId, offset, limit) {
 export async function getOutfit(id, wardrobeId) {
     let url = `${endpoint}/${id}`;
     url = urlParamCheck(url, 'wardrobe_id', wardrobeId);
+
+    return new Promise((resolve, reject) => {
+        client.get(url)
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(new Error(error));
+            });
+    });
+}
+
+export async function suggestOutfit(id, wardrobeId) {
+    let url = `${endpoint}/2323/outfits`;
 
     return new Promise((resolve, reject) => {
         client.get(url)
@@ -91,6 +105,7 @@ export default {
     getAllOutfits,
     getOutfit,
     createOutfit,
+    suggestOutfit,
     updateOutfit,
     deleteOutfit,
 }

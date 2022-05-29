@@ -1,7 +1,7 @@
 import client from './Base';
 import urlParamCheck from './Utils';
 
-const endpoint = '/clothes';
+const endpoint = '/clothes/';
 
 
 export async function getAllClothes(tags, wardrobeId, offset, limit) {
@@ -51,9 +51,9 @@ export async function getClothes(id, wardrobeId) {
     });
 }
 
-export async function createClothes(url, tags) {
+export async function createClothes(url, value, tags) {
     return new Promise((resolve, reject) => {
-        client.post(endpoint, { url, tags })
+        client.post(endpoint, { url, value, tags })
             .then((response) => {
                 resolve(response.data);
             })

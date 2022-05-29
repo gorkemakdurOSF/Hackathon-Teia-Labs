@@ -7,6 +7,8 @@ import { faImage, faXmark, faArrowUpFromBracket } from "@fortawesome/free-solid-
 import { Group, Text } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 
+import clothesService from "../../services/Clothes";
+
 function getIcon(status) {
   if (status.accepted) return faArrowUpFromBracket;
   else if (status.rejected) return faXmark;
@@ -44,7 +46,8 @@ function DragAndDropZone(props) {
     load(true);
     const formData = new FormData();
     formData.append('file', files[0]);
-    setTimeout(() => navigate('/insert/product'), 1000);
+    clothesService.createClothes('', files[0], [])
+    // setTimeout(() => navigate('/insert/product'), 1000);
   }
 
   return (
