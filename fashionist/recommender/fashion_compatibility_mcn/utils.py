@@ -118,6 +118,7 @@ def get_category_options(
             path = os.path.join(imgs_dir, label) + ".jpg"
             options[category].append({
                 'id': label.replace('/', '_'),
+                'outfit_id': label.split('/')[0],
                 'path': path,
                 'value': value,
             })
