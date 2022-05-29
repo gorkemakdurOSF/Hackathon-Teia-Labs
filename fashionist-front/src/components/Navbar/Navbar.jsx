@@ -2,7 +2,7 @@ import "./Navbar.scss";
 
 import { Group, Navbar as MantineNavbar, Text, UnstyledButton } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faShoppingBag, faShirt } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faShoppingBag, faShirt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -17,10 +17,10 @@ function Navbar() {
         <MantineNavbar.Section grow mt="md">
           <Group direction="column">
             <UnstyledButton className="nav-link">
-              <Link to="/search">
+              <Link to="/home">
                 <Group>
-                  <FontAwesomeIcon className="link-icon" icon={faMagnifyingGlass} />
-                  <Text className="link-text" size="xl" weight={700}>Search</Text>
+                  <FontAwesomeIcon className="link-icon" icon={faHome} />
+                  <Text className="link-text" size="xl" weight={700}>Home</Text>
                 </Group>
               </Link>
             </UnstyledButton>
@@ -36,7 +36,7 @@ function Navbar() {
               <Link to="/wardrobe">
                 <Group>
                   <FontAwesomeIcon className="link-icon" icon={faShirt} />
-                  <Text className="link-text" size="xl" weight={700}>Wardrobe</Text>
+                  <Text className="link-text" size="xl" weight={700}>Outfits</Text>
                 </Group>
               </Link>
             </UnstyledButton>
