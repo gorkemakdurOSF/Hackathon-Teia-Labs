@@ -1,15 +1,20 @@
 import "./Product.scss";
-import React from "react";
+import React, { useState } from "react";
 
 import image from "../../assets/mocks/product.jpg";
 import ndImage from "../../assets/mocks/product-zoom.jpg";
 
 import { Image, Group } from "@mantine/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as heartFull, faShoppingBag } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as heartEmpty } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as heartFull, faShoppingBag, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as heartEmpty, faCircle } from "@fortawesome/free-regular-svg-icons";
 
-function template(liked, hover, isHover, isLikeable, isShoppable, like) {
+function Product(props) {
+  const { id, liked, isLikeable, isShoppable, isSelectable, add, remove } = props;
+  const [isLike, like] = useState(liked);
+  const [isHover, hover] = useState(false);
+  const [isSelect, select] = useState(false);
+
   return (
     <div className="product">
       <div className="product-icons">
@@ -27,9 +32,22 @@ function template(liked, hover, isHover, isLikeable, isShoppable, like) {
             isLikeable
             && (
               <FontAwesomeIcon
-                className={`like-icon icon ${!liked ? "not-liked" : "liked"}`}
-                icon={!liked ? heartEmpty : heartFull}
-                onClick={like}
+                className={`like-icon icon ${!isLike ? "not-liked" : "liked"}`}
+                icon={!isLike ? heartEmpty : heartFull}
+                onClick={() => like(!isLike)}
+              />
+            )
+          }
+          {
+            isSelectable
+            && (
+              <FontAwesomeIcon
+                className={`select-icon icon ${!isSelect ? "not-selected" : "selected"}`}
+                icon={!isSelect ? faCircle : faCircleCheck}
+                onClick={() => {
+                  !isSelect ? add(id) : remove(id)
+                  select(!isSelect)
+                }}
               />
             )
           }
@@ -41,9 +59,14 @@ function template(liked, hover, isHover, isLikeable, isShoppable, like) {
         className="product-image"
         onMouseEnter={() => hover(true)}
         onMouseLeave={() => hover(false)}
+        onClick={isSelectable ? () => {
+          !isSelect ? add(id) : remove(id)
+          select(!isSelect)
+        } : ""}
+        style={{ cursor: isSelectable ? "pointer" : "" }}
       />
     </div>
   );
 };
 
-export default template;
+export default Product;

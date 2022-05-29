@@ -30,6 +30,14 @@
             .shop-icon {
                 color: darken(colors.$light-grey, 25%);
             }
+
+            .select-icon {
+                color: colors.$empty-heart;
+            }
+
+            .selected {
+                color: darken(colors.$green, 25%);
+            }
         }
     }
 
