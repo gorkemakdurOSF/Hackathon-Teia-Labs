@@ -62,7 +62,7 @@ async def create_clothes(value: UploadFile, tags: List[str]=Body()):
         ))
 
     clothes = (await Clothes.read(kwargs=dict(_id=clothes_id)))[0]
-    clothes['url'] = "/".join([clothes["url"].split("/"), str(clothes_id)])
+    clothes['url'] = "/".join([clothes["url"].split("/")[0], str(clothes_id)])
     await Clothes.update(clothes_id, clothes)
 
     with open(f'/opt/ssd/osf-hackat/images/{clothes_id}', 'wb') as f:
