@@ -86,3 +86,11 @@ export async function deleteOutfit(id) {
             });
     });
 }
+
+export default {
+    getAllOutfits,
+    getOutfit,
+    createOutfit,
+    updateOutfit,
+    deleteOutfit,
+}

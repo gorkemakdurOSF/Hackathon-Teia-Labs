@@ -28,6 +28,7 @@ function template(clothes) {
                                                     liked={c.isLiked}
                                                     url={c.url}
                                                     isLikeable
+                                                    key={c._id}
                                                 />
                                             </Grid.Col>
                                         )

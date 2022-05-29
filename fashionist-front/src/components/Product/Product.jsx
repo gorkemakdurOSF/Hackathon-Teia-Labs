@@ -62,7 +62,7 @@ function Product(props) {
                 onClick={isSelectable ? () => {
                     !isSelect ? add(id) : remove(id)
                     select(!isSelect)
-                } : ""}
+                } : () => {}}
                 style={{ cursor: isSelectable ? "pointer" : "" }}
             />
         </div>
