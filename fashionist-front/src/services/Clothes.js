@@ -86,3 +86,11 @@ export async function deleteCLothes(id) {
             });
     });
 }
+
+export default {
+    getAllClothes,
+    getClothes,
+    createClothes,
+    updateClothes,
+    deleteCLothes
+};
