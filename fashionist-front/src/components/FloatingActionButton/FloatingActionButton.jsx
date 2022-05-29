@@ -64,7 +64,10 @@ function FloatingActionButton() {
                   </Text>
                 </Link>
               </Paper>
-              <div className="blur" />
+              {
+                isClick
+                && <div className="blur" />
+              }
             </>
           )
         }
