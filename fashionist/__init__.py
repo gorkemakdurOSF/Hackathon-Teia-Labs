@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 
 from .models import init_database, Database
@@ -20,6 +21,8 @@ def create_app():
     app.include_router(clothes.router)
     app.include_router(wardrobe.router)
     app.include_router(outfit.router)
+
+    app.mount('/', StaticFiles(directory='/opt/ssd/osf-hackathon-2022/images/'), name='static')
 
     database = Database
 

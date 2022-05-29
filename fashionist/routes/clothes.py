@@ -10,6 +10,7 @@ from ..models.wardrobe import Wardrobe
 router = APIRouter(prefix='/clothes')
 
 
+
 @router.get('/', status_code=200, response_model=List[Clothes])
 async def get_all_clothes(
         tags: Optional[List[str]] = None,
@@ -58,6 +59,9 @@ async def create_clothes(value: UploadFile, tags: List[str]=Body()):
         value=value.file.read(), 
         tags=tags, url=f'http://192.168.1.121:8080/{value.filename}'
         ))
+
+    with open(f'/opt/ssd/osf-hackathon-2022/images/{value.filename}', 'wb') as f:
+        f.write(value.file.read())
 
     clothes = (await Clothes.read(kwargs=dict(_id=clothes_id)))[0]
     
