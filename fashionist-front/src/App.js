@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Shop from './pages/Shop';
 import Wardrobe from './pages/Wardrobe';
 import InsertProduct from './pages/InsertProduct';
+import ProductPage from './pages/ProductPage';
 import CreateOutfit from './pages/CreateOutfit';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="shop" element={<Shop />} />
         <Route path="wardrobe" element={<Wardrobe />} />
         <Route path="insert" element={<InsertProduct />} />
+        <Route path="insert/product" element={<ProductPage />} />
         <Route path="create/outfit" element={<CreateOutfit />} />
       </Routes>
     </div>
