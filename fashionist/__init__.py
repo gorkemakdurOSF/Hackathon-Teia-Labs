@@ -27,8 +27,12 @@ def create_app():
     database = Database
 
     @app.on_event('startup')
-    def startup():
+    async def startup():
         nonlocal database
         database = init_database(SETTINGS.DB_CONNECTION_URI)
+        await database.database.clothes.delete_many({})
+        await database.database.outfit.delete_many({})
+        await database.database.wardrobe.delete_many({})
+        await database.database.user.delete_many({})
 
     return app

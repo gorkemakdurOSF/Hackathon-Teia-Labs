@@ -55,13 +55,14 @@ async def get_clothes(_id: str, wardrobe_id: Optional[str] = None):
 
 @router.post('/', status_code=201, response_model=Clothes)
 async def create_clothes(value: UploadFile, tags: List[str]=Body()):
+    data = value.file.read()
     clothes_id = await Clothes.create(Clothes(
-        value=value.file.read(), 
+        value=data, 
         tags=tags, url=f'http://192.168.1.121:8080/{value.filename}'
         ))
 
-    with open(f'/opt/ssd/osf-hackathon-2022/images/{value.filename}', 'wb') as f:
-        f.write(value.file.read())
+    with open(f'./images/{value.filename}', 'wb') as f:
+        f.write(data)
 
     clothes = (await Clothes.read(kwargs=dict(_id=clothes_id)))[0]
     
