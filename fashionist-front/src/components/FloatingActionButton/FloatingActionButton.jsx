@@ -18,7 +18,7 @@ function FloatingActionButton() {
         className="floating-action-button"
         onMouseEnter={() => hover(true)}
         onMouseLeave={() => hover(false)}
-        onClick={() => click(true)}
+        onClick={() => click(!isClick)}
         ref={clickOutsideRef}
       >
         <Tooltip
