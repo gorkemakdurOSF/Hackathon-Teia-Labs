@@ -14,7 +14,7 @@ function template(search, ref, searchString, clear, width) {
         icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
         rightSection={
           searchString.length > 0 ?
-            <FontAwesomeIcon style={{ cursor: "pointer" }} icon={faXmark} onClick={clear} /> :
+            <FontAwesomeIcon style={{ cursor: "pointer" }} icon={faXmark} onClick={clear} className="x-icon" /> :
             ""
         }
         onKeyUp={search}

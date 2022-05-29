@@ -1,3 +1,9 @@
+@use "../../styles/colors.scss" as colors;
+
 .search-bar {
     min-width: fit-content;
+
+    .x-icon {
+        color: darken(colors.$light-grey, 25%);
+    }
 }
